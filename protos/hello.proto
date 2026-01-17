@@ -1,0 +1,31 @@
+// 声明proto语法
+syntax = "proto3";
+// 声明包名
+package server;
+
+// 定义请求结构体【编号不能重复】
+message HelloRequest {
+  string name = 1; // 姓名,编号1
+  string message = 2; // 消息,编号2
+  int32 age = 3; // 年龄,编号3
+}
+
+// 定义响应结构体
+message HelloResponse {
+  string message = 1; // 响应消息,编号1
+  int32 error_code = 2; // 错误码,编号2
+}
+
+// 定义服务接口
+service HelloService{
+  // 定义一元RPC方法【客户端请求一次，服务端返回一次】
+  rpc SayHello(HelloRequest) returns (HelloResponse);
+}
+
+/*
+ todo: 使用【更新了proto文件，再次执行命令生成Python代码即可】
+  1、进入要使用的.proto文件所在目录。
+  2、执行以下命令，生成Python代码。
+  python -m grpc_tools.protoc -I. --python_out=指定生成Python代码的目录 --grpc_python_out=指定生成gRPC_Python代码的目录 指定的.proto文件
+  具体示例> python -m grpc_tools.protoc -I. --python_out=../server --grpc_python_out=../server hello.proto
+*/
