@@ -12,7 +12,11 @@ def run_client():
         # 调用服务端的方法【参数：请求字段... ，超时时间】
         response = stub.SayHello(hello_pb2.HelloRequest(name='张三', message='你好，很高兴认识你', age=18), timeout=10)
         # 打印响应
-        print(response.message)
+        resp = {
+            'message': response.message,
+            'error_code': response.error_code,
+        }
+        print(resp)
 
 if __name__ == '__main__':
     run_client()

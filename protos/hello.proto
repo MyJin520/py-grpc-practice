@@ -19,6 +19,7 @@ message HelloResponse {
 // 定义服务接口
 service HelloService{
   // 定义一元RPC方法【客户端请求一次，服务端返回一次】
+  // rpc 方法名(请求结构体) returns (响应结构体);
   rpc SayHello(HelloRequest) returns (HelloResponse);
 }
 
