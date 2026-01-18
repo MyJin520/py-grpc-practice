@@ -21,7 +21,7 @@ message UserRegistration{
   string email = 4;       // 邮箱,编号4
   repeated string hobbies = 6; // 爱好,编号6  --> repeated表示列表
 
-  // 保留编号5，禁止使用（因为删掉了like字段，防止后续复用编号6）
+  // 保留编号5，禁止使用（因为删掉了like字段，防止后续复用编号5）
   // repeated string like =5;
   reserved 5;
 }

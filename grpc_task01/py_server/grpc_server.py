@@ -22,7 +22,6 @@ class UserService(user_pb2_grpc.UserServiceServicer):
             "Age": request.age,
             "Hobbies": request.hobbies,
         }
-        # 修复BUG1：给全局字典赋值，而不是重新定义局部变量
         user_map[request.email] = user_info
         resp = f"用户注册成功，用户信息：{user_info}"
         code = 200
@@ -50,22 +49,15 @@ class UserService(user_pb2_grpc.UserServiceServicer):
 
         resp = str(user_map[request.email])
         code = 200
-        # 修复BUG3：返回字段名是 message 不是 messages
         return user_pb2.UserQueryResponse(message=resp, code=code)
 
     def Update(self, request, context):
-        # if request.age <= 0 or request.age >= 120:
-        #     print("server_age:",request.age)
-        #     resp = "更新的年龄不符合规范"
-        #     code = 400
-        #     # 修复BUG4：返回字段名是 message 不是 messages
-        #     return user_pb2.UserUpdateResponse(message=resp, code=code)
+
         if request.email not in user_map:
             resp = "更新失败，用户不存在"
             code = 400
             return user_pb2.UserUpdateResponse(message=resp, code=code)
 
-        # 修复BUG2：key使用大写的 Age/Hobbies，和注册时一致
         user_map[request.email]["Age"] = request.age
         user_map[request.email]["Hobbies"] = request.hobbies
 
