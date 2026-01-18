@@ -1,0 +1,83 @@
+// 指定当前protobuf文件采用的语法版本为 proto3 版本
+// proto3 是目前主流、推荐的版本，兼容性更强，语法更简洁，支持Go/Python/Java等所有grpc主流开发语言
+syntax = "proto3";
+
+// ========== protobuf 自身的包声明 ==========
+// 作用：为当前.proto文件内定义的所有service、message指定【protobuf层面的命名空间】
+// 核心：防止多个不同的.proto文件中，出现同名的服务/消息结构体，造成命名冲突
+package grpc_task01;
+
+// ========== Go语言专属的编译配置项 (重中之重) ==========
+// 作用：专门告诉 protoc-gen-go 和 protoc-gen-go-grpc 插件，编译生成Go代码时的【输出目录】和【Go代码的包名】
+// 语法格式：option go_package = "生成Go文件的输出目录路径;生成Go文件的包名";  【分号是固定分隔符，缺一不可】
+option go_package = "./;grpc_task01";
+
+
+// 用户注册请求
+message UserRegistration{
+  string name = 1;        // 姓名,编号1
+  string password = 2;    // 密码,编号2
+  int32 age = 3;          // 年龄,编号3
+  string email = 4;       // 邮箱,编号4
+  repeated string hobbies = 6; // 爱好,编号6  --> repeated表示列表
+
+  // 保留编号5，禁止使用（因为删掉了like字段，防止后续复用编号6）
+  // repeated string like =5;
+  reserved 5;
+}
+
+// 用户注册响应
+message UserRegistrationResponse{
+  string message = 1; // 响应消息,编号1
+  int32 code = 2; // 错误码,编号2
+}
+
+
+// 用户登录请求
+message UserLoginRequest{
+  string email = 1; // 邮箱,编号1
+  string password = 2; // 密码,编号2
+}
+
+// 用户登录响应
+message UserLoginResponse{
+  string message = 1; // 响应消息,编号1
+  int32 code = 2; // 错误码,编号2
+}
+
+
+// 用户查询请求
+message UserQueryRequest{
+  string email = 1; // 邮箱,编号1
+}
+
+// 用户查询响应
+message UserQueryResponse{
+  string message = 1; // 响应消息,编号1
+  int32 code = 2; // 错误码,编号2
+}
+
+// 用户更新请求
+message UserUpdateRequest{
+  string email = 1; // 邮箱,编号1
+  int32 age = 2; // 年龄,编号2
+  repeated string hobbies = 3; // 爱好,编号3
+}
+
+// 用户更新响应
+message UserUpdateResponse{
+  string message = 1; // 响应消息,编号1
+  int32 code = 2; // 错误码,编号2
+}
+
+// 定义服务
+service UserService{
+  // 用户注册
+  rpc Register(UserRegistration) returns (UserRegistrationResponse);
+  // 用户登录
+  rpc Login(UserLoginRequest) returns (UserLoginResponse);
+  // 用户查询
+  rpc Query(UserQueryRequest) returns (UserQueryResponse);
+  // 用户更新
+  rpc Update(UserUpdateRequest) returns (UserUpdateResponse);
+}

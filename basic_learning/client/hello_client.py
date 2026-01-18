@@ -1,6 +1,5 @@
 import grpc
-from server import hello_pb2
-from server import hello_pb2_grpc
+from basic_learning.server import hello_pb2, hello_pb2_grpc
 
 
 # 开启客户端【连接客户端】【参数：ip:端口号】
