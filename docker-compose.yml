@@ -1,0 +1,37 @@
+services:
+  # PostgreSQL 服务（修改后）
+  postgres:
+    image: postgres:16
+    container_name: my-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root                # 新增：指定超级用户为 root
+      POSTGRES_PASSWORD: 123456          # root 用户的密码
+      POSTGRES_DB: myapp_db              # 启动时自动创建的数据库
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - app-network
+
+  # Redis 服务（不变）
+  redis:
+    image: redis:8.4.0
+    container_name: my-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    networks:
+      - app-network
+    # command: redis-server --requirepass myredis123
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  app-network:
+    driver: bridge

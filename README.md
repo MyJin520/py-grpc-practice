@@ -17,3 +17,10 @@ pip install grpcio-tools
 ## basic_learning目录为基础学习
 
 ## grcp_task01为rpc跨服务通信练习
+
+## 启动容器
+docker-compose up -d
+
+## 进入容器
+docker exec -it my-postgres bash
+docker exec -it my-redis redis-cli
