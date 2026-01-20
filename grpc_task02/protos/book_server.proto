@@ -1,0 +1,94 @@
+/*
+todo 前置条件
+
+# 插件1：生成 所有message对应的Go结构体代码（基础数据结构）
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+
+# 插件2：生成 gRPC的服务端骨架 + 客户端Stub桩代码（核心grpc调用逻辑）
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+*/
+
+syntax = "proto3";
+
+option go_package = "./pb;pb";
+
+package book;
+
+// 定义结构体
+message Book{
+  int32 id = 1;
+  string bookName = 2;
+  string author = 3;
+  float price = 4;
+  int32 count = 5;
+  bool status = 6;
+}
+
+// 请求体
+message AddBookReq{
+  string bookName = 1;
+  string author = 2;
+  float price = 3;
+  int32 count = 4;
+  bool status = 5;
+}
+
+message BookIDReq{
+  int32 id = 1;
+}
+
+message UpDateBookReq{
+  int32 id = 1;
+  string bookName = 2;
+  string author = 3;
+  float price = 4;
+  int32 count = 5;
+  bool status = 6;
+}
+
+// 响应体
+message CommonResp{
+  bool success = 1;
+  string msg = 2;
+  int32 code = 3;
+}
+
+message GetBookByIDResp{
+  bool success = 1;
+  Book book = 2;
+  int32 code = 3;
+}
+
+message FindBooksResp{
+  bool success = 1;
+  repeated Book book = 2;
+  int32 code = 3;
+}
+
+// 定义服务
+service BookServer{
+  rpc AddBook(AddBookReq) returns (CommonResp);
+  rpc GetBookByID(BookIDReq) returns (GetBookByIDResp);
+  rpc DeleteBookByID(BookIDReq) returns (CommonResp);
+  rpc FindBooks(FindBooksResp) returns (FindBooksResp);
+  rpc UpdateBook(UpDateBookReq) returns (CommonResp);
+}
+
+/*
+todo 构建命令
+绝对路径  protoc --go_out=. --go_opt=module=你的go.mod里的module名 --go-grpc_out=. --go-grpc_opt=module=你的go.mod里的module名 proto/book_service.proto
+相对路径  protoc .\book_server.proto --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative
+
+
+todo 命令拆分
+protoc                  # 核心编译器命令
+proto/book_service.proto # 你的proto文件路径（项目根目录为基准）
+--go_out=.              # 告诉protoc-gen-go插件：生成的pb.go文件输出到【当前目录】
+--go_opt=paths=source_relative # 生成的文件路径，和源proto文件相对应
+--go_opt=module=xxx     # 指定项目的go mod模块名，规范导入路径
+--go-grpc_out=.         # 告诉protoc-gen-go-grpc插件：生成的grpc.pb.go文件输出到【当前目录】
+--go-grpc_opt=paths=source_relative # 同上，路径相对
+--go-grpc_opt=module=xxx # 同上，指定模块名
+
+*/
