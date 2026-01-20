@@ -1,11 +1,11 @@
-# go-grpc-practice
-用于个人快速部署python GRPC
+# grpc-practice
+用于个人快速部署GRPC
 
 
-## 安装grpc
+## 安装py_grpc
 pip install grpcio
 
-## 安装grpc工具
+## 安装py_grpc工具
 pip install grpcio-tools
 
 ## grcp是服务端与客户端分离的架构
