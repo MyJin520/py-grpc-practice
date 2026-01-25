@@ -22,7 +22,7 @@ message Book{
   string author = 3;
   float price = 4;
   int32 count = 5;
-  bool status = 6;
+  int32 status = 6;
 }
 
 // 请求体
@@ -31,11 +31,17 @@ message AddBookReq{
   string author = 2;
   float price = 3;
   int32 count = 4;
-  bool status = 5;
+  int32 status = 5;
 }
 
 message BookIDReq{
   int32 id = 1;
+}
+
+
+message FindBooksRep{
+  repeated int32 ids = 1;
+  int32 status = 2;
 }
 
 message UpDateBookReq{
@@ -44,7 +50,7 @@ message UpDateBookReq{
   string author = 3;
   float price = 4;
   int32 count = 5;
-  bool status = 6;
+  int32 status = 6;
 }
 
 // 响应体
@@ -71,7 +77,7 @@ service BookServer{
   rpc AddBook(AddBookReq) returns (CommonResp);
   rpc GetBookByID(BookIDReq) returns (GetBookByIDResp);
   rpc DeleteBookByID(BookIDReq) returns (CommonResp);
-  rpc FindBooks(FindBooksResp) returns (FindBooksResp);
+  rpc FindBooks(FindBooksRep) returns (FindBooksResp);
   rpc UpdateBook(UpDateBookReq) returns (CommonResp);
 }
 
