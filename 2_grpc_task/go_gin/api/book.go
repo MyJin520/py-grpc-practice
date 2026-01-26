@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"grpc-develop/grpc_task02/go_gin/request"
-	"grpc-develop/grpc_task02/rpc/pb"
+	"grpc-develop/2_grpc_task/go_gin/request"
+	"grpc-develop/2_grpc_task/rpc/pb"
 )
 
 type BookHandler struct {

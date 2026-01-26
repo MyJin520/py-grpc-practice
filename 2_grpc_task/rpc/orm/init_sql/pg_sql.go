@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"grpc-develop/grpc_task02/rpc/global"
-	"grpc-develop/grpc_task02/rpc/orm/models"
+	"grpc-develop/2_grpc_task/rpc/global"
+	"grpc-develop/2_grpc_task/rpc/orm/models"
 )
 
 func InitPgSql() {

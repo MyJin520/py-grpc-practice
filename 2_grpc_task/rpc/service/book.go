@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
-	"grpc-develop/grpc_task02/rpc/global"
-	"grpc-develop/grpc_task02/rpc/orm/models"
-	"grpc-develop/grpc_task02/rpc/pb"
+	"grpc-develop/2_grpc_task/rpc/global"
+	"grpc-develop/2_grpc_task/rpc/orm/models"
+	"grpc-develop/2_grpc_task/rpc/pb"
 )
 
 type RpcBookServer struct {

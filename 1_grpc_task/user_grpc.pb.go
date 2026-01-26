@@ -11,7 +11,7 @@
 // 作用：为当前.proto文件内定义的所有service、message指定【protobuf层面的命名空间】
 // 核心：防止多个不同的.proto文件中，出现同名的服务/消息结构体，造成命名冲突
 
-package grpc_task01
+package __grpc_task
 
 import (
 	context "context"

@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"grpc-develop/grpc_task02/go_gin/api"
-	"grpc-develop/grpc_task02/rpc/pb"
+	"grpc-develop/2_grpc_task/go_gin/api"
+	"grpc-develop/2_grpc_task/rpc/pb"
 )
 
 // SetupBookRouter 设置书籍路由

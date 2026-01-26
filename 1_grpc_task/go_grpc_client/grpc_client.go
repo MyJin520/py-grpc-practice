@@ -3,7 +3,7 @@ package go_grpc_client // todo 如果只进行grpc服务端+客户端测试请�
 import (
 	"context"
 	"fmt"
-	"grpc-develop/grpc_task01"
+	"grpc-develop/1_grpc_task"
 	"log"
 
 	"google.golang.org/grpc"
@@ -24,7 +24,7 @@ func main() {
 	defer conn.Close()
 
 	// 2. 创建UserService的gRPC客户端对象（核心：自动生成的桩代码）
-	client := grpc_task01.NewUserServiceClient(conn)
+	client := __grpc_task.NewUserServiceClient(conn)
 
 	// 3. 调用各个业务方法：注册 -> 登录 -> 查询 -> 更新
 	ctx := context.Background()
@@ -40,9 +40,9 @@ func main() {
 }
 
 // 测试注册接口
-func TestRegister(ctx context.Context, client grpc_task01.UserServiceClient) {
+func TestRegister(ctx context.Context, client __grpc_task.UserServiceClient) {
 	// 构造注册请求参数
-	req := &grpc_task01.UserRegistration{
+	req := &__grpc_task.UserRegistration{
 		Name:     "张三",
 		Email:    "zhangsan@test.com",
 		Password: "123456",
@@ -59,8 +59,8 @@ func TestRegister(ctx context.Context, client grpc_task01.UserServiceClient) {
 }
 
 // 测试登录接口
-func TestLogin(ctx context.Context, client grpc_task01.UserServiceClient) {
-	req := &grpc_task01.UserLoginRequest{
+func TestLogin(ctx context.Context, client __grpc_task.UserServiceClient) {
+	req := &__grpc_task.UserLoginRequest{
 		Email:    "zhangsan@test.com",
 		Password: "123456",
 	}
@@ -73,8 +73,8 @@ func TestLogin(ctx context.Context, client grpc_task01.UserServiceClient) {
 }
 
 // 测试查询接口
-func TestQuery(ctx context.Context, client grpc_task01.UserServiceClient) {
-	req := &grpc_task01.UserQueryRequest{
+func TestQuery(ctx context.Context, client __grpc_task.UserServiceClient) {
+	req := &__grpc_task.UserQueryRequest{
 		Email: "zhangsan@test.com",
 	}
 	res, err := client.Query(ctx, req)
@@ -86,8 +86,8 @@ func TestQuery(ctx context.Context, client grpc_task01.UserServiceClient) {
 }
 
 // 测试更新接口
-func TestUpdate(ctx context.Context, client grpc_task01.UserServiceClient) {
-	req := &grpc_task01.UserUpdateRequest{
+func TestUpdate(ctx context.Context, client __grpc_task.UserServiceClient) {
+	req := &__grpc_task.UserUpdateRequest{
 		Email:   "zhangsan@test.com",
 		Age:     26,
 		Hobbies: []string{"羽毛球", "编程", "读书"},

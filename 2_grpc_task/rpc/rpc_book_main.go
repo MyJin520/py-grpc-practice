@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"google.golang.org/grpc"
-	"grpc-develop/grpc_task02/rpc/orm/init_sql"
-	"grpc-develop/grpc_task02/rpc/pb"
-	"grpc-develop/grpc_task02/rpc/service"
+	"grpc-develop/2_grpc_task/rpc/orm/init_sql"
+	"grpc-develop/2_grpc_task/rpc/pb"
+	"grpc-develop/2_grpc_task/rpc/service"
 
 	"net"
 )

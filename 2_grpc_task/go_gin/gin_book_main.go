@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"grpc-develop/grpc_task02/go_gin/router"
-	"grpc-develop/grpc_task02/rpc/pb"
+	"grpc-develop/2_grpc_task/go_gin/router"
+	"grpc-develop/2_grpc_task/rpc/pb"
 )
 
 // GrpcClient gRPC客户端结构体

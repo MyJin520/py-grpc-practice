@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"grpc-develop/grpc_task01"
-	"grpc-develop/grpc_task01/go_grpc_client"
+	"grpc-develop/1_grpc_task"
+	"grpc-develop/1_grpc_task/go_grpc_client"
 	"log"
 )
 
@@ -20,7 +20,7 @@ type APIResponse struct {
 
 // gRPC客户端连接
 type GrpcClient struct {
-	UserClient grpc_task01.UserServiceClient
+	UserClient __grpc_task.UserServiceClient
 	Conn       *grpc.ClientConn
 }
 
@@ -33,7 +33,7 @@ func initGrpcClient() (*GrpcClient, error) {
 	}
 
 	return &GrpcClient{
-		UserClient: grpc_task01.NewUserServiceClient(conn),
+		UserClient: __grpc_task.NewUserServiceClient(conn),
 		Conn:       conn,
 	}, nil
 }
@@ -105,7 +105,7 @@ func handleRegister(grpcClient *GrpcClient) gin.HandlerFunc {
 		}
 
 		// 转换为gRPC请求
-		grpcReq := &grpc_task01.UserRegistration{
+		grpcReq := &__grpc_task.UserRegistration{
 			Name:     req.Name,
 			Email:    req.Email,
 			Password: req.Password,
@@ -140,7 +140,7 @@ func handleLogin(grpcClient *GrpcClient) gin.HandlerFunc {
 		}
 
 		// 转换为gRPC请求
-		grpcReq := &grpc_task01.UserLoginRequest{
+		grpcReq := &__grpc_task.UserLoginRequest{
 			Email:    req.Email,
 			Password: req.Password,
 		}
@@ -172,7 +172,7 @@ func handleQuery(grpcClient *GrpcClient) gin.HandlerFunc {
 		}
 
 		// 转换为gRPC请求
-		grpcReq := &grpc_task01.UserQueryRequest{
+		grpcReq := &__grpc_task.UserQueryRequest{
 			Email: req.Email,
 		}
 
@@ -203,7 +203,7 @@ func handleUpdate(grpcClient *GrpcClient) gin.HandlerFunc {
 		}
 		fmt.Print("age", req.Age, " email:", req.Hobbies, " hobbies:", req.Hobbies)
 		// 转换为gRPC请求
-		grpcReq := &grpc_task01.UserUpdateRequest{
+		grpcReq := &__grpc_task.UserUpdateRequest{
 			Email:   req.Email,
 			Age:     req.Age,
 			Hobbies: req.Hobbies,
